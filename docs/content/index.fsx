@@ -5,10 +5,7 @@
 DynamicsCRMProvider
 ===================
 
-The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/library/hh156509.aspx) which allows to access [Microsoft Dynamics CRM](http://www.microsoft.com/en-us/dynamics/erp-nav-overview.aspx) data from a SQL Server in a strongly typed way.
-It aims to be a replacement for data access technologies like C/Front.NET but with a much easier API.
-
-It's supporting LINQ queries, schema exploration and much more besides.
+The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/library/hh156509.aspx) which allows to access [Microsoft Dynamics CRM](http://www.microsoft.com/en-us/dynamics/crm.aspx) data in a strongly typed way.
 
 <div class="row">
   <div class="span1"></div>
@@ -30,47 +27,26 @@ This example demonstrates the use of the type provider from a F# script file:
 
 *)
 // reference the type provider dll
+#r "System.Runtime.Serialization"   
 #r "FSharp.Data.DynamicsCRMProvider.dll"
+#r @"..\lib\Microsoft.Xrm.Sdk.dll"   
+
 open System
 open System.Linq
-open FSharp.Data
+open FSharp.Data.TypeProviders
 
-// configure the Dynamics CRM type provider with a connection string to the db
-// and set the company
-type CRM = DynamicsCRM<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
-                           Company="CRONUS International Ltd.">
-let db = CRM.GetDataContext()
+// configure the Dynamics CRM type provider
+let xrm = XrmDataProvider<"http://server/org/XRMServices/2011/Organization.svc">.GetDataContext()
+let accounts = xrm.accountSet |> Seq.toList
 
-// now you have typed access to the whole Dynamics CRM database
+// now you have typed access to Dynamics CRM
 
-// print all sales headers
-for sh in db.``Sales Header`` do
-    printfn "%s %s" sh.``Sell-to Customer No.`` sh.``Salesperson Code``
-
-(**
-
-You will even get Intellisense for all of this:
-
-![alt text](img/TypedDynamicsCRM.png "Intellisense for Dynamics CRM")
-
-Queries
--------
-
-It's possible to perform LINQ queries against the Dynamics CRM database. These queries are transformed into SQL and run on the SQL Server:
-
-*)
-
-// select the customer name, the sales header no. and currency for all sales headers where the customer is named "Steffen"
-query{ for cus in db.Customer do
-       join sh in db.``Sales Header`` on (cus.``No.`` = sh.``Sell-to Customer No.``)
-       where (cus.Name.StartsWith "Steffen") 
-       select (cus.Name,sh.``No.``,sh.``Currency Code``) } 
-  |> Seq.toArray
+let accounts = 
+    query { for a in xrm.accountSet do 
+            where (a.name.Contains "Contoso") 
+            select a } |> Seq.toList
 
 (**
-
-More about queries can be found in the [Query article](queries.html).
-
 
 Contributing and copyright
 --------------------------

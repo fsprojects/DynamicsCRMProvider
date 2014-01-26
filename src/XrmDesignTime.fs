@@ -3,10 +3,10 @@
 // We disclaim all warranties, either express or implied, including the 
 // warranties of merchantability and fitness for a particular purpose.
 
-namespace FSharpx.TypeProviders.XrmProvider
+namespace FSharp.Data.TypeProviders.XrmProvider
 
-open FSharpx.TypeProviders.XrmProvider.Runtime
-open FSharpx.TypeProviders.XrmProvider.Runtime.Common
+open FSharp.Data.TypeProviders.XrmProvider.Runtime
+open FSharp.Data.TypeProviders.XrmProvider.Runtime.Common
 
 open System
 open System.IO
@@ -57,7 +57,7 @@ type private OptionSetType =
 type XrmTypeProvider(config: TypeProviderConfig) as this =     
     inherit TypeProviderForNamespaces()
     let xrmRuntimeInfo = XrmRuntimeInfo(config)
-    let ns = "FSharpx.TypeProviders.XrmProvider"     
+    let ns = "FSharp.Data.TypeProviders"     
     let asm = Assembly.GetExecutingAssembly()
     
     let createOrgService uri clientCreds deviceCreds =

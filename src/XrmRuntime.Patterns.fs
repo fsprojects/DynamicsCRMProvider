@@ -1,9 +1,16 @@
-﻿module internal FSharp.Data.Sql.Patterns
+﻿// Copyright (c) Microsoft Corporation 2005-2013.
+// This sample code is provided "as is" without warranty of any kind. 
+// We disclaim all warranties, either express or implied, including the 
+// warranties of merchantability and fitness for a particular purpose.
+
+module internal FSharpx.TypeProviders.XrmProvider.Runtime.Patterns
 
 open System
 open System.Linq.Expressions
 open System.Reflection
-open FSharp.Data.Sql
+
+open Microsoft.Xrm.Sdk
+open Microsoft.Xrm.Sdk.Query
 
 let (|MethodWithName|_|)   (s:string) (m:MethodInfo)   = if s = m.Name then Some () else None
 let (|PropertyWithName|_|) (s:string) (m:PropertyInfo) = if s = m.Name then Some () else None
@@ -25,11 +32,6 @@ let (|PropertyGet|_|) (e:Expression) =
         match e.Member with 
         | :? PropertyInfo as p -> Some ((match e.Expression with null -> None | obj -> Some obj), p)
         | _ -> None
-    | _ -> None
-
-let (|Convert|_|) (e:Expression) = 
-    match e.NodeType, e with 
-    | ExpressionType.Convert, (:? UnaryExpression as ue ) -> Some ue.Operand
     | _ -> None
 
 let (|Constant|_|) (e:Expression) = 
@@ -66,14 +68,6 @@ let (|OptionalQuote|) (e:Expression) =
     | ExpressionType.Quote, (:? UnaryExpression as ce) ->  ce.Operand
     | _ -> e
 
-let (|OptionalFSharpOptionValue|) (e:Expression) = 
-    match e.NodeType, e with 
-    | ExpressionType.MemberAccess, ( :? MemberExpression as e) -> 
-        match e.Member with 
-        | :? PropertyInfo as p when p.Name = "Value" && e.Member.DeclaringType.FullName.StartsWith("Microsoft.FSharp.Core.FSharpOption`1") -> e.Expression
-        | _ -> upcast e 
-    | _ -> e
-
 let (|AndAlso|_|) (e:Expression) =
     match e.NodeType, e with
     | ExpressionType.AndAlso, ( :? BinaryExpression as be) -> Some(be.Left,be.Right)
@@ -90,36 +84,40 @@ let (|AndAlsoOrElse|_|) (e:Expression) =
     | ExpressionType.AndAlso, ( :? BinaryExpression as be)  -> Some(be.Left,be.Right)
     | _ -> None
 
-let (|SqlColumnGet|_|) = function 
-    | OptionalFSharpOptionValue(MethodCall(Some(o),((MethodWithName "GetColumn" as meth) | (MethodWithName "GetColumnOption" as meth)),[String key])) -> 
+let (|XrmAttributeGet|_|) = function 
+    | MethodCall(Some(o),(MethodWithName "GetAttribute" as meth),[String key]) -> 
         match o with
         | :? MemberExpression as m  -> Some(m.Member.Name,key,meth.ReturnType) 
         | _ -> Some(String.Empty,key,meth.ReturnType) 
     | _ -> None
 
-let (|OptionIsSome|_|) = function    
-    | MethodCall(None,MethodWithName("get_IsSome"), [e] ) -> Some e
+let (|XrmOptionSetGet|_|) = function
+    | MethodCall(None, MethodWithName "ToEnum", [MethodCall(Some(o),(MethodWithName "GetEnumValue" as meth), [String key])]) ->
+        match o with
+        | :? ParameterExpression  as m -> Some(m.Name,key,meth.ReturnType )
+        | :? MemberExpression as m  -> Some(m.Member.Name,key,meth.ReturnType) 
+        | _ -> failwith "unsupported optionset access! the squirrels are in the system!"
     | _ -> None
 
-let (|OptionIsNone|_|) = function    
-    | MethodCall(None,MethodWithName("get_IsNone"), [e] ) -> Some e
-    | _ -> None
-
-let (|SqlSpecialOpArr|_|) = function
-    // for some crazy reason, simply using (|=|) stopped working ??
-    | MethodCall(None,MethodWithName("op_BarEqualsBar"), [SqlColumnGet(ti,key,_); NewArrayValues values] ) -> Some(ti,ConditionOperator.In,   key,values)
-    | MethodCall(None,MethodWithName("op_BarLessGreaterBar"),[SqlColumnGet(ti,key,_); NewArrayValues values] ) -> Some(ti,ConditionOperator.NotIn,key,values)
+let (|XrmSpecialOpArr|_|) = function
+    | MethodCall(None,(|=|), [XrmAttributeGet(ti,key,_); NewArrayValues values] ) -> Some(ti,ConditionOperator.In,   key,values)
+    | MethodCall(None,(|<>|),[XrmAttributeGet(ti,key,_); NewArrayValues values] ) -> Some(ti,ConditionOperator.NotIn,key,values)
     | _ -> None
     
-let (|SqlSpecialOp|_|) = function
-    | MethodCall(None,MethodWithName("op_EqualsPercent"), [SqlColumnGet(ti,key,_); right]) -> Some(ti,ConditionOperator.Like,   key,Expression.Lambda(right).Compile().DynamicInvoke())
-    | MethodCall(None,MethodWithName("op_LessGreaterPercent"),[SqlColumnGet(ti,key,_); right]) -> Some(ti,ConditionOperator.NotLike,key,Expression.Lambda(right).Compile().DynamicInvoke())
+let (|XrmSpecialOp|_|) = function
+    | MethodCall(None,(=%), [XrmAttributeGet(ti,key,_); right]) -> Some(ti,ConditionOperator.Like,   key,Expression.Lambda(right).Compile().DynamicInvoke())
+    | MethodCall(None,(<>%),[XrmAttributeGet(ti,key,_); right]) -> Some(ti,ConditionOperator.NotLike,key,Expression.Lambda(right).Compile().DynamicInvoke())
     // String  methods
-    | MethodCall(Some(SqlColumnGet(ti,key,t)), MethodWithName "Contains", [right]) when t = typeof<string> -> 
+    | MethodCall(Some(XrmAttributeGet(ti,key,t)), MethodWithName "Contains", [right]) when t = typeof<string> -> 
+        // Although "contains" appears in the ConditionOperator enum, it is not actually implemented server side so make this a like instead
         Some(ti,ConditionOperator.Like,key,box (sprintf "%%%O%%" (Expression.Lambda(right).Compile().DynamicInvoke())))
+    | MethodCall(Some(XrmAttributeGet(ti,key,t)), MethodWithName "StartsWith", [right]) when t = typeof<string> -> 
+        Some(ti,ConditionOperator.BeginsWith,key,Expression.Lambda(right).Compile().DynamicInvoke())
+    | MethodCall(Some(XrmAttributeGet(ti,key,t)), MethodWithName "EndsWith", [right]) when t = typeof<string> -> 
+        Some(ti,ConditionOperator.EndsWith,key,Expression.Lambda(right).Compile().DynamicInvoke())
     | _ -> None
                 
-let (|SqlCondOp|_|) (e:Expression) = 
+let (|XrmCondOp|_|) (e:Expression) = 
     match e.NodeType, e with 
     | ExpressionType.Equal,              (:? BinaryExpression as ce) -> Some (ConditionOperator.Equal,        ce.Left,ce.Right)
     | ExpressionType.LessThan,           (:? BinaryExpression as ce) -> Some (ConditionOperator.LessThan,     ce.Left,ce.Right)

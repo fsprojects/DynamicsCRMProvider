@@ -1,38 +1,11 @@
-﻿namespace FSharp.Data.Sql
+// Copyright (c) Microsoft Corporation 2005-2013.
+// This sample code is provided "as is" without warranty of any kind. 
+// We disclaim all warranties, either express or implied, including the 
+// warranties of merchantability and fitness for a particular purpose.
+
+namespace FSharpx.TypeProviders.XrmProvider
 
 open System.Linq
-
-type ConditionOperator = 
-    | Like
-    | NotLike
-    | Equal
-    | NotEqual
-    | GreaterThan
-    | LessThan
-    | GreaterEqual
-    | LessEqual
-    | IsNull
-    | NotNull
-    | In
-    | NotIn
-    with 
-    override x.ToString() =
-        // NOTE: these are MS SQL Server textual representations of the operators.
-        // other providers may need to provide their own versions.
-        match x with 
-        | Like          -> "LIKE"
-        | NotLike       -> "NOT LIKE"
-        | Equal         -> "="
-        | NotEqual      -> "<>"
-        | GreaterThan   -> ">"
-        | LessThan      -> "<"
-        | GreaterEqual  -> ">="
-        | LessEqual     -> "<="
-        | IsNull        -> "IS NULL"
-        | NotNull       -> "IS NOT NULL"
-        | In            -> "IN"
-        | NotIn         -> "NOT IN"
-
 // Dummy operators, these are placeholders that are replaced in the expression tree traversal with special server-side operations such as In, Like
 // The operators here are used to force the compiler to statically check against the correct types
 [<AutoOpenAttribute>]

@@ -1,24 +1,24 @@
 (*** hide ***)
 #I "../../bin"
-#r "FSharp.Data.DynamicsNAVProvider.dll"
+#r "FSharp.Data.DynamicsCRMProvider.dll"
 
 open System
 open System.Linq
 open FSharp.Data
 
-// configure the Dynamics NAV type provider with a connection string to the db
-type NAV = DynamicsNAV<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
+// configure the Dynamics CRM type provider with a connection string to the db
+type CRM = DynamicsCRM<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
                            Company="CRONUS International Ltd.">
-let db = NAV.GetDataContext()
+let db = CRM.GetDataContext()
 
 (**
-DynamicsNAVProvider - Queries
+DynamicsCRMProvider - Queries
 =============================
-It's possible to perform LINQ queries against the Dynamics NAV database. These queries are transformed into SQL and run on the SQL Server:
+It's possible to perform LINQ queries against the Dynamics CRM database. These queries are transformed into SQL and run on the SQL Server:
 
 *)
 
-// count all NAV objects
+// count all CRM objects
 db.Object.Count()
 // [fsi: val it : int = 13859]
 

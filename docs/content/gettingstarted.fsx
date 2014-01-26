@@ -1,15 +1,15 @@
 (*** hide ***)
 #I "../../bin"
-#r "FSharp.Data.DynamicsNAVProvider.dll"
+#r "FSharp.Data.DynamicsCRMProvider.dll"
 
 (**
-Getting started with the DynamicsNAVProvider
+Getting started with the DynamicsCRMProvider
 ============================================
 
 Open Visual Studio 2013 and create a new F# Console application. Right-click on the project and select "Manage NuGet Packages".
-Make sure the "Include Prerelease" is selected and search for "[DynamicsNAVProvider](https://nuget.org/packages/DynamicsNAVProvider)" and press "Install":
+Make sure the "Include Prerelease" is selected and search for "[DynamicsCRMProvider](https://nuget.org/packages/DynamicsCRMProvider)" and press "Install":
 
-![alt text](img/NuGet.png "Install the Dynamics NAV type provider")
+![alt text](img/NuGet.png "Install the Dynamics CRM type provider")
 
 You also need to add a reference to "System.Data.dll" to your project.
 
@@ -21,10 +21,10 @@ open System
 open System.Linq
 open FSharp.Data
 
-// configure the Dynamics NAV type provider with a connection string to the db
-type NAV = DynamicsNAV<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
+// configure the Dynamics CRM type provider with a connection string to the db
+type CRM = DynamicsCRM<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
                            Company="CRONUS International Ltd.">
-let db = NAV.GetDataContext()
+let db = CRM.GetDataContext()
 
 [<EntryPoint>]
 let main argv = 

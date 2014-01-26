@@ -2,10 +2,10 @@
 #I "../../bin"
 
 (**
-DynamicsNAVProvider
+DynamicsCRMProvider
 ===================
 
-The DynamicsNAVProvider is a [F# type provider](http://msdn.microsoft.com/en-us/library/hh156509.aspx) which allows to access [Microsoft Dynamics NAV](http://www.microsoft.com/en-us/dynamics/erp-nav-overview.aspx) data from a SQL Server in a strongly typed way.
+The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/library/hh156509.aspx) which allows to access [Microsoft Dynamics CRM](http://www.microsoft.com/en-us/dynamics/erp-nav-overview.aspx) data from a SQL Server in a strongly typed way.
 It aims to be a replacement for data access technologies like C/Front.NET but with a much easier API.
 
 It's supporting LINQ queries, schema exploration and much more besides.
@@ -14,8 +14,8 @@ It's supporting LINQ queries, schema exploration and much more besides.
   <div class="span1"></div>
   <div class="span6">
     <div class="well well-small" id="nuget">
-      The library can be <a href="https://nuget.org/packages/DynamicsNAVProvider">installed from NuGet</a>:
-      <pre>PM> Install-Package DynamicsNAVProvider -prerelease</pre>
+      The library can be <a href="https://nuget.org/packages/DynamicsCRMProvider">installed from NuGet</a>:
+      <pre>PM> Install-Package DynamicsCRMProvider -prerelease</pre>
     </div>
   </div>
   <div class="span1"></div>
@@ -30,18 +30,18 @@ This example demonstrates the use of the type provider from a F# script file:
 
 *)
 // reference the type provider dll
-#r "FSharp.Data.DynamicsNAVProvider.dll"
+#r "FSharp.Data.DynamicsCRMProvider.dll"
 open System
 open System.Linq
 open FSharp.Data
 
-// configure the Dynamics NAV type provider with a connection string to the db
+// configure the Dynamics CRM type provider with a connection string to the db
 // and set the company
-type NAV = DynamicsNAV<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
+type CRM = DynamicsCRM<"Data Source=OMEGA;Initial Catalog=Dev;Integrated Security=True",
                            Company="CRONUS International Ltd.">
-let db = NAV.GetDataContext()
+let db = CRM.GetDataContext()
 
-// now you have typed access to the whole Dynamics NAV database
+// now you have typed access to the whole Dynamics CRM database
 
 // print all sales headers
 for sh in db.``Sales Header`` do
@@ -51,12 +51,12 @@ for sh in db.``Sales Header`` do
 
 You will even get Intellisense for all of this:
 
-![alt text](img/TypedDynamicsNAV.png "Intellisense for Dynamics NAV")
+![alt text](img/TypedDynamicsCRM.png "Intellisense for Dynamics CRM")
 
 Queries
 -------
 
-It's possible to perform LINQ queries against the Dynamics NAV database. These queries are transformed into SQL and run on the SQL Server:
+It's possible to perform LINQ queries against the Dynamics CRM database. These queries are transformed into SQL and run on the SQL Server:
 
 *)
 
@@ -84,9 +84,9 @@ The library is available under Public Domain license, which allows modification 
 redistribution for both commercial and non-commercial purposes. For more information see the 
 [License file][license] in the GitHub repository. 
 
-  [content]: https://github.com/fsprojects/DynamicsNAVProvider/tree/master/docs/content
-  [gh]: https://github.com/fsprojects/DynamicsNAVProvider
-  [issues]: https://github.com/fsprojects/DynamicsNAVProvider/issues
-  [readme]: https://github.com/fsprojects/DynamicsNAVProvider/blob/master/README.md
-  [license]: https://github.com/fsprojects/DynamicsNAVProvider/blob/master/LICENSE.md
+  [content]: https://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/content
+  [gh]: https://github.com/fsprojects/DynamicsCRMProvider
+  [issues]: https://github.com/fsprojects/DynamicsCRMProvider/issues
+  [readme]: https://github.com/fsprojects/DynamicsCRMProvider/blob/master/README.md
+  [license]: https://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.md
 *)

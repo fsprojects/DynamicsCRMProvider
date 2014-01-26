@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -7,10 +7,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>4eea1ad8-e8a9-4d54-bc39-d5f536366945</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DynamicsNAVProvider</RootNamespace>
-    <AssemblyName>FSharp.Data.DynamicsNAVProvider</AssemblyName>
+    <RootNamespace>DynamicsCRMProvider</RootNamespace>
+    <AssemblyName>FSharp.Data.DynamicsCRMProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>DynamicsNAVProvider</Name>
+    <Name>DynamicsCRMProvider</Name>
     <SccProjectName>SAK</SccProjectName>
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
@@ -29,7 +29,7 @@
     </DocumentationFile>
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe</StartProgram>
-    <StartArguments>C:\Users\Steffen\Dropbox\Code\DynamicsNAVProvider\DynamicsNAVProvider.Docs.sln</StartArguments>
+    <StartArguments>C:\Users\Steffen\Dropbox\Code\DynamicsCRMProvider\DynamicsCRMProvider.Docs.sln</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,7 +38,7 @@
     <OutputPath>..\bin</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>..\bin\FSharp.Data.DynamicsNAVProvider.XML</DocumentationFile>
+    <DocumentationFile>..\bin\FSharp.Data.DynamicsCRMProvider.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

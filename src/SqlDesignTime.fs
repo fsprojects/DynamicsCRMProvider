@@ -1,4 +1,4 @@
-﻿namespace FSharp.Data.Sql
+namespace FSharp.Data.Sql
 
 open FSharp.Data.Sql.Runtime
 open FSharp.Data.Sql.Common
@@ -289,7 +289,7 @@ type SqlTypeProvider(config: TypeProviderConfig) as this =
             ])
         rootType
     
-    let paramSqlType = ProvidedTypeDefinition(sqlRuntimeInfo.RuntimeAssembly, ns, "DynamicsNAV", Some(typeof<obj>), HideObjectMethods = true)
+    let paramSqlType = ProvidedTypeDefinition(sqlRuntimeInfo.RuntimeAssembly, ns, "DynamicsCRM", Some(typeof<obj>), HideObjectMethods = true)
     
     let conString = ProvidedStaticParameter("ConnectionString",typeof<string>)    
     let optionTypes = ProvidedStaticParameter("UseOptionTypes",typeof<bool>,false)
@@ -297,7 +297,7 @@ type SqlTypeProvider(config: TypeProviderConfig) as this =
     let dbVendor = ProvidedStaticParameter("DatabaseVendor",typeof<DatabaseProviderTypes>,DatabaseProviderTypes.MSSQLSERVER)
     let individualsAmount = ProvidedStaticParameter("IndividualsAmount",typeof<int>,1000)    
     let resolutionPath = ProvidedStaticParameter("ResolutionPath",typeof<string>,"")    
-    let helpText = "<summary>Typed representation of a Dynamics NAV database</summary>
+    let helpText = "<summary>Typed representation of a Dynamics CRM database</summary>
                     <param name='ConnectionString'>The connection string for the sql server</param>
                     <param name='Company'>The company</param>
                     <param name='IndividualsAmount'>The amount of sample entities to project into the type system for each sql entity type. Default 1000.</param>

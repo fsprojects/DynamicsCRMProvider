@@ -1,14 +1,14 @@
-DynamicsNAVProvider
+DynamicsCRMProvider
 ===================
 
-A type provider which allows to access Microsoft Dynamics NAV data from a SQL Server in a strongly typed way.
+A type provider which allows to access Microsoft Dynamics CRM data from a SQL Server in a strongly typed way.
 It's supporting LINQ queries, schema exploration and much more besides.
 
-<a href="http://fsprojects.github.io/DynamicsNAVProvider" target="_blank">Documentation is available here.</a>
+<a href="http://fsprojects.github.io/DynamicsCRMProvider" target="_blank">Documentation is available here.</a>
 
 ## Building
 
-* Mono: Run *build.sh*  [![Mono build status](https://travis-ci.org/fsprojects/DynamicsNAVProvider.png)](https://travis-ci.org/fsprojects/DynamicsNAVProvider)
+* Mono: Run *build.sh*  [![Mono build status](https://travis-ci.org/fsprojects/DynamicsCRMProvider.png)](https://travis-ci.org/fsprojects/DynamicsCRMProvider)
 * Windows: Run *build.cmd* 
 
 ## Disclaimer

@@ -5,8 +5,8 @@
     <version>@build.number@</version>
     <authors>@authors@</authors>
     <owners>@authors@</owners>
-    <licenseUrl>http://github.com/fsprojects/DynamicsNAVProvider/blob/master/LICENSE.md</licenseUrl>
-    <projectUrl>http://fsprojects.github.com/DynamicsNAVProvider</projectUrl>
+    <licenseUrl>http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>http://fsprojects.github.com/DynamicsCRMProvider</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>@summary@</summary>
     <description>@description@</description>

@@ -1,22 +1,22 @@
-﻿// --------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Builds the documentation from `.fsx` and `.md` files in the 'docs/content' directory
 // (the generated documentation is stored in the 'docs/output' directory)
 // --------------------------------------------------------------------------------------
 
 // Binaries that have XML documentation (in a corresponding generated XML file)
-let referenceBinaries = [ "DynamicsNAVProvider.dll" ]
+let referenceBinaries = [ "DynamicsCRMProvider.dll" ]
 // Web site location for the generated documentation
-let website = "/DynamicsNAVProvider"
+let website = "/DynamicsCRMProvider"
 
-let githubLink = "http://github.com/fsprojects/DynamicsNAVProvider"
+let githubLink = "http://github.com/fsprojects/DynamicsCRMProvider"
 
 // Specify more information about your project
 let info =
-  [ "project-name", "DynamicsNAVProvider"
+  [ "project-name", "DynamicsCRMProvider"
     "project-author", "Steffen Forkmann"
-    "project-summary", "Type providers for Dynamics NAV access."
+    "project-summary", "Type providers for Dynamics CRM access."
     "project-github", githubLink
-    "project-nuget", "http://nuget.com/packages/DynamicsNAVProvider" ]
+    "project-nuget", "http://nuget.com/packages/DynamicsCRMProvider" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below

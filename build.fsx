@@ -11,19 +11,19 @@ open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open System
 
-let project = "DynamicsNAVProvider"
+let project = "DynamicsCRMProvider"
 
-let summary = "Type providers for Dynamics NAV access."
-let description = "Type providers for Dynamics NAV access."
-let authors = ["Steffen Forkmann"; "Ross McKinlay" ]
-let tags = "F# fsharp typeproviders dynamics nav"
+let summary = "Type providers for Dynamics CRM access."
+let description = "Type providers for Dynamics CRM access."
+let authors = ["Ross McKinlay"; "Steffen Forkmann" ]
+let tags = "F# fsharp typeproviders dynamics CRM"
 
-let solutionFile  = "DynamicsNAVProvider"
+let solutionFile  = "DynamicsCRMProvider"
 
 let testAssemblies = "tests/**/bin/Release/*.Tests*.dll"
 let gitHome = "https://github.com/fsprojects"
-let gitName = "DynamicsNAVProvider"
-let cloneUrl = "git@github.com:fsprojects/DynamicsNAVProvider.git"
+let gitName = "DynamicsCRMProvider"
+let cloneUrl = "git@github.com:fsprojects/DynamicsCRMProvider.git"
 let nugetDir = "./nuget/"
 
 // Read additional information from the release notes document

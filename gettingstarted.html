@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Getting started with the DynamicsCRMProvider
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Type providers for Dynamics CRM access.">
+    <meta name="author" content="Steffen Forkmann">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="/DynamicsCRMProvider/content/style.css" />
+    <script type="text/javascript" src="/DynamicsCRMProvider/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/fsprojects/DynamicsCRMProvider">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/DynamicsCRMProvider/index.html">DynamicsCRMProvider</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1>Getting started with the DynamicsCRMProvider</h1>
+
+<p>Open Visual Studio 2013 and create a new F# Console application. Right-click on the project and select "Manage NuGet Packages".
+Make sure the "Include Prerelease" is selected and search for "<a href="https://nuget.org/packages/DynamicsCRMProvider">DynamicsCRMProvider</a>" and press "Install":</p>
+
+<p><img src="img/NuGet.png" alt="alt text" title="Install the Dynamics CRM type provider" /></p>
+
+<p>You also need to add a reference to "System.Data.dll" to your project.</p>
+
+<p>Now you can go to the "Program.fs" file and start using the type provider:</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">open</span> <span class="i">System</span>
+<span class="k">open</span> <span class="i">System</span><span class="o">.</span><span class="i">Linq</span>
+<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Data</span>
+
+<span class="c">// configure the Dynamics CRM type provider with a connection string to the db</span>
+<span class="k">type</span> <span class="i">CRM</span> <span class="o">=</span> <span class="i">DynamicsCRM</span><span class="o">&lt;</span><span class="s">&quot;</span><span class="s">Data</span><span class="s"> </span><span class="s">Source</span><span class="s">=</span><span class="s">OMEGA</span><span class="s">;</span><span class="s">Initial</span><span class="s"> </span><span class="s">Catalog</span><span class="s">=</span><span class="s">Dev</span><span class="s">;</span><span class="s">Integrated</span><span class="s"> </span><span class="s">Security</span><span class="s">=</span><span class="s">True</span><span class="s">&quot;</span>,
+                           <span class="i">Company</span><span class="o">=</span><span class="s">&quot;</span><span class="s">CRONUS</span><span class="s"> </span><span class="s">International</span><span class="s"> </span><span class="s">Ltd</span><span class="s">.</span><span class="s">&quot;</span><span class="o">&gt;</span>
+<span class="k">let</span> <span class="i">db</span> <span class="o">=</span> <span class="i">CRM</span><span class="o">.</span><span class="i">GetDataContext</span>()
+
+[&lt;<span class="i">EntryPoint</span>&gt;]
+<span class="k">let</span> <span class="i">main</span> <span class="i">argv</span> <span class="o">=</span> 
+    <span class="c">// print all sales headers</span>
+    <span class="k">for</span> <span class="i">sh</span> <span class="k">in</span> <span class="i">db</span><span class="o">.</span><span class="i">``Sales Header``</span> <span class="k">do</span>
+        <span class="i">printfn</span> <span class="s">&quot;</span><span class="s">%</span><span class="s">s</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span class="i">sh</span><span class="o">.</span><span class="i">``Sell-to Customer No.``</span> <span class="i">sh</span><span class="o">.</span><span class="i">``Salesperson Code``</span>
+
+    <span class="i">Console</span><span class="o">.</span><span class="i">ReadKey</span>() <span class="o">|&gt;</span> <span class="i">ignore</span>
+    <span class="n">0</span> <span class="c">// exit code</span></pre>
+</td>
+</tr>
+</table>
+
+<p>Press F5 to run the project.</p>
+
+
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">DynamicsCRMProvider</li>
+            <li><a href="/DynamicsCRMProvider/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.com/packages/DynamicsCRMProvider">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/fsprojects/DynamicsCRMProvider">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.md">License</a></li>
+              <li><a href="http://github.com/fsprojects/DynamicsCRMProvider/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+              <li class="nav-header">Articles</li>
+              <li><a href="/DynamicsCRMProvider/gettingstarted.html">Getting started</a></li>
+              <li><a href="/DynamicsCRMProvider/queries.html">Queries</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/fsprojects/DynamicsCRMProvider"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>

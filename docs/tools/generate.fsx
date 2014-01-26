@@ -16,7 +16,7 @@ let info =
     "project-author", "Steffen Forkmann"
     "project-summary", "Type providers for Dynamics CRM access."
     "project-github", githubLink
-    "project-nuget", "http://nuget.com/packages/DynamicsCRMProvider" ]
+    "project-nuget", "https://www.nuget.org/packages/DynamicsCRMProvider" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below

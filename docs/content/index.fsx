@@ -18,8 +18,6 @@ The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/
   <div class="span1"></div>
 </div>
 
-If you are new to type providers you should read the ["Getting started" article](gettingstarted.html).
-
 Example
 -------
 

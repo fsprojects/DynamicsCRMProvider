@@ -35,10 +35,7 @@
           
 <h1>DynamicsCRMProvider</h1>
 
-<p>The DynamicsCRMProvider is a <a href="http://msdn.microsoft.com/en-us/library/hh156509.aspx">F# type provider</a> which allows to access <a href="http://www.microsoft.com/en-us/dynamics/erp-nav-overview.aspx">Microsoft Dynamics CRM</a> data from a SQL Server in a strongly typed way.
-It aims to be a replacement for data access technologies like C/Front.NET but with a much easier API.</p>
-
-<p>It's supporting LINQ queries, schema exploration and much more besides.</p>
+<p>The DynamicsCRMProvider is a <a href="http://msdn.microsoft.com/en-us/library/hh156509.aspx">F# type provider</a> which allows to access <a href="http://www.microsoft.com/en-us/dynamics/crm.aspx">Microsoft Dynamics CRM</a> data in a strongly typed way.</p>
 
 <div class="row">
   <div class="span1"></div>
@@ -75,59 +72,33 @@ It aims to be a replacement for data access technologies like C/Front.NET but wi
 <span class="l">15: </span>
 <span class="l">16: </span>
 <span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
 <span class="c">// reference the type provider dll</span>
+<span class="prep">#r</span> <span class="s">&quot;</span><span class="s">System</span><span class="s">.</span><span class="s">Runtime</span><span class="s">.</span><span class="s">Serialization</span><span class="s">&quot;</span>   
 <span class="prep">#r</span> <span class="s">&quot;</span><span class="s">FSharp</span><span class="s">.</span><span class="s">Data</span><span class="s">.</span><span class="s">DynamicsCRMProvider</span><span class="s">.</span><span class="s">dll</span><span class="s">&quot;</span>
+<span class="prep">#r</span> <span class="s">@&quot;</span><span class="s">.</span><span class="s">.</span><span class="s">\</span><span class="s">lib</span><span class="s">\</span><span class="s">Microsoft</span><span class="s">.</span><span class="s">Xrm</span><span class="s">.</span><span class="s">Sdk</span><span class="s">.</span><span class="s">dll</span><span class="s">&quot;</span>   
+
 <span class="k">open</span> <span class="i">System</span>
 <span class="k">open</span> <span class="i">System</span><span class="o">.</span><span class="i">Linq</span>
-<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Data</span>
+<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Data</span><span class="o">.</span><span class="i">TypeProviders</span>
 
-<span class="c">// configure the Dynamics CRM type provider with a connection string to the db</span>
-<span class="c">// and set the company</span>
-<span class="k">type</span> <span class="i">CRM</span> <span class="o">=</span> <span class="i">DynamicsCRM</span><span class="o">&lt;</span><span class="s">&quot;</span><span class="s">Data</span><span class="s"> </span><span class="s">Source</span><span class="s">=</span><span class="s">OMEGA</span><span class="s">;</span><span class="s">Initial</span><span class="s"> </span><span class="s">Catalog</span><span class="s">=</span><span class="s">Dev</span><span class="s">;</span><span class="s">Integrated</span><span class="s"> </span><span class="s">Security</span><span class="s">=</span><span class="s">True</span><span class="s">&quot;</span>,
-                           <span class="i">Company</span><span class="o">=</span><span class="s">&quot;</span><span class="s">CRONUS</span><span class="s"> </span><span class="s">International</span><span class="s"> </span><span class="s">Ltd</span><span class="s">.</span><span class="s">&quot;</span><span class="o">&gt;</span>
-<span class="k">let</span> <span class="i">db</span> <span class="o">=</span> <span class="i">CRM</span><span class="o">.</span><span class="i">GetDataContext</span>()
+<span class="c">// configure the Dynamics CRM type provider</span>
+<span class="k">let</span> <span class="i">xrm</span> <span class="o">=</span> <span class="i">XrmDataProvider</span><span class="o">&lt;</span><span class="s">&quot;</span><span class="s">http</span><span class="s">:</span><span class="s">/</span><span class="s">/</span><span class="s">server</span><span class="s">/</span><span class="s">org</span><span class="s">/</span><span class="s">XRMServices</span><span class="s">/</span><span class="s">2011</span><span class="s">/</span><span class="s">Organization</span><span class="s">.</span><span class="s">svc</span><span class="s">&quot;</span><span class="o">&gt;</span><span class="o">.</span><span class="i">GetDataContext</span>()
+<span class="k">let</span> <span class="i">accounts</span> <span class="o">=</span> <span class="i">xrm</span><span class="o">.</span><span class="i">accountSet</span> <span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">toList</span>
 
-<span class="c">// now you have typed access to the whole Dynamics CRM database</span>
+<span class="c">// now you have typed access to Dynamics CRM</span>
 
-<span class="c">// print all sales headers</span>
-<span class="k">for</span> <span class="i">sh</span> <span class="k">in</span> <span class="i">db</span><span class="o">.</span><span class="i">``Sales Header``</span> <span class="k">do</span>
-    <span class="i">printfn</span> <span class="s">&quot;</span><span class="s">%</span><span class="s">s</span><span class="s"> </span><span class="s">%</span><span class="s">s</span><span class="s">&quot;</span> <span class="i">sh</span><span class="o">.</span><span class="i">``Sell-to Customer No.``</span> <span class="i">sh</span><span class="o">.</span><span class="i">``Salesperson Code``</span></pre>
+<span class="k">let</span> <span class="i">accounts</span> <span class="o">=</span> 
+    <span class="i">query</span> { <span class="k">for</span> <span class="i">a</span> <span class="k">in</span> <span class="i">xrm</span><span class="o">.</span><span class="i">accountSet</span> <span class="k">do</span> 
+            <span class="i">where</span> (<span class="i">a</span><span class="o">.</span><span class="i">name</span><span class="o">.</span><span class="i">Contains</span> <span class="s">&quot;</span><span class="s">Contoso</span><span class="s">&quot;</span>) 
+            <span class="i">select</span> <span class="i">a</span> } <span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">toList</span></pre>
 </td>
 </tr>
 </table>
-
-<p>You will even get Intellisense for all of this:</p>
-
-<p><img src="img/TypedDynamicsCRM.png" alt="alt text" title="Intellisense for Dynamics CRM" /></p>
-
-<h2>Queries</h2>
-
-<p>It's possible to perform LINQ queries against the Dynamics CRM database. These queries are transformed into SQL and run on the SQL Server:</p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="c">// select the customer name, the sales header no. and currency for all sales headers where the customer is named &quot;Steffen&quot;</span>
-<span class="i">query</span>{ <span class="k">for</span> <span class="i">cus</span> <span class="k">in</span> <span class="i">db</span><span class="o">.</span><span class="i">Customer</span> <span class="k">do</span>
-       <span class="i">join</span> <span class="i">sh</span> <span class="k">in</span> <span class="i">db</span><span class="o">.</span><span class="i">``Sales Header``</span> <span class="i">on</span> (<span class="i">cus</span><span class="o">.</span><span class="i">``No.``</span> <span class="o">=</span> <span class="i">sh</span><span class="o">.</span><span class="i">``Sell-to Customer No.``</span>)
-       <span class="i">where</span> (<span class="i">cus</span><span class="o">.</span><span class="i">Name</span><span class="o">.</span><span class="i">StartsWith</span> <span class="s">&quot;</span><span class="s">Steffen</span><span class="s">&quot;</span>) 
-       <span class="i">select</span> (<span class="i">cus</span><span class="o">.</span><span class="i">Name</span>,<span class="i">sh</span><span class="o">.</span><span class="i">``No.``</span>,<span class="i">sh</span><span class="o">.</span><span class="i">``Currency Code``</span>) } 
-  <span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">toArray</span></pre>
-</td>
-</tr>
-</table>
-
-<p>More about queries can be found in the <a href="queries.html">Query article</a>.</p>
 
 <h2>Contributing and copyright</h2>
 
@@ -151,9 +122,6 @@ redistribution for both commercial and non-commercial purposes. For more informa
             <li><a href="http://github.com/fsprojects/DynamicsCRMProvider">Source Code on GitHub</a></li>
             <li><a href="http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.md">License</a></li>
               <li><a href="http://github.com/fsprojects/DynamicsCRMProvider/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-              <li class="nav-header">Articles</li>
-              <li><a href="/DynamicsCRMProvider/gettingstarted.html">Getting started</a></li>
-              <li><a href="/DynamicsCRMProvider/queries.html">Queries</a></li>
           </ul>
         </div>
       </div>

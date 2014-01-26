@@ -18,6 +18,8 @@ The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/
   <div class="span1"></div>
 </div>
 
+You can read more about it at the [F# team blog](http://blogs.msdn.com/b/fsharpteam/archive/2013/02/14/the-f-microsoft-dynamics-crm-type-provider-sample-strongly-typed-enterprise-scale-customer-data-made-simple.aspx).
+
 Example
 -------
 

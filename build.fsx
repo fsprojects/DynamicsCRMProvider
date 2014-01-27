@@ -113,7 +113,7 @@ Target "GenerateDocs" (fun _ ->
 Target "ReleaseDocs" (fun _ ->
     let ghPages      = "gh-pages"
     let ghPagesLocal = "temp/gh-pages"
-    Repository.clone "temp" (cloneUrl) ghPages
+    Repository.clone "temp" cloneUrl ghPages
     Branches.checkoutBranch ghPagesLocal ghPages
     fullclean "temp/gh-pages"
     CopyRecursive "docs/output" ghPagesLocal true |> printfn "%A"

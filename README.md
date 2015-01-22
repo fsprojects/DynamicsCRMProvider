@@ -1,7 +1,10 @@
+[![Issue Stats](http://issuestats.com/github/fsprojects/DynamicsCRMProvider/badge/issue)](http://issuestats.com/github/fsprojects/DynamicsCRMProvider)
+[![Issue Stats](http://issuestats.com/github/fsprojects/DynamicsCRMProvider/badge/pr)](http://issuestats.com/github/fsprojects/DynamicsCRMProvider)
+
 DynamicsCRMProvider
 ===================
 
-A type provider which allows to access Microsoft Dynamics CRM.
+A type provider which allows to access Microsoft Dynamics CRM. [![NuGet Status](http://img.shields.io/nuget/v/DynamicsCRMProvider.svg?style=flat)](https://www.nuget.org/packages/DynamicsCRMProvider/)
 
 In order to use this type provider you will ned Microsoft Identity Model installed on the client machine.
 

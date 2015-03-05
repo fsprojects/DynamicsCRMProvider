@@ -12,7 +12,7 @@ The DynamicsCRMProvider is a [F# type provider](http://msdn.microsoft.com/en-us/
   <div class="span6">
     <div class="well well-small" id="nuget">
       The library can be <a href="https://nuget.org/packages/DynamicsCRMProvider">installed from NuGet</a>:
-      <pre>PM> Install-Package DynamicsCRMProvider -prerelease</pre>
+      <pre>PM> Install-Package DynamicsCRMProvider</pre>
     </div>
   </div>
   <div class="span1"></div>

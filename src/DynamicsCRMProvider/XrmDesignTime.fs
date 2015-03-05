@@ -25,7 +25,7 @@ open Microsoft.Xrm.Sdk.Metadata
 open Microsoft.Xrm.Sdk.Client
 open Microsoft.Crm.Services.Utility
 
-open Samples.FSharp.ProvidedTypes
+open ProviderImplementation.ProvidedTypes
 
 /// Determines how relationship names appear on generated types
 type RelationshipNamingType =

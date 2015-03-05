@@ -1,0 +1,22 @@
+type project
+id DynamicsCRMProvider
+owners
+    Ross McKinlay, Steffen Forkmann
+authors 
+    Ross McKinlay, Steffen Forkmann
+projectUrl
+    http://github.com/fsprojects/DynamicsCRMProvider
+iconUrl
+    https://raw.githubusercontent.com/fsprojects/DynamicsCRMProvider/master/docs/files/img/logo.png
+licenseUrl
+    http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    F# fsharp typeproviders dynamics CRM
+summary
+    Type providers for Dynamics CRM access.
+description
+    Type providers for Dynamics CRM access.

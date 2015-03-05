@@ -3,8 +3,6 @@
 // (the generated documentation is stored in the 'docs/output' directory)
 // --------------------------------------------------------------------------------------
 
-// Binaries that have XML documentation (in a corresponding generated XML file)
-let referenceBinaries = [ "DynamicsCRMProvider.dll" ]
 // Web site location for the generated documentation
 let website = "/DynamicsCRMProvider"
 
@@ -13,24 +11,19 @@ let githubLink = "http://github.com/fsprojects/DynamicsCRMProvider"
 // Specify more information about your project
 let info =
   [ "project-name", "DynamicsCRMProvider"
-    "project-author", "Steffen Forkmann"
-    "project-summary", "Type providers for Dynamics CRM access."
+    "project-author", "Ross McKinlay; Steffen Forkmann"
+    "project-summary", "A type provider for Microsoft Dynamics CRM 2011."
     "project-github", githubLink
-    "project-nuget", "https://www.nuget.org/packages/DynamicsCRMProvider" ]
+    "project-nuget", "http://nuget.org/packages/DynamicsCRMProvider" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below
 // --------------------------------------------------------------------------------------
 
-#I "../../packages/FSharp.Formatting.2.3.5-beta/lib/net40"
-#I "../../packages/RazorEngine.3.3.0/lib/net40"
-#I "../../packages/FSharp.Compiler.Service.0.0.11-alpha/lib/net40"
-#r "../../packages/Microsoft.AspNet.Razor.2.0.30506.0/lib/net40/System.Web.Razor.dll"
-#r "../../packages/FAKE/tools/FakeLib.dll"
-#r "RazorEngine.dll"
-#r "FSharp.Literate.dll"
-#r "FSharp.CodeFormat.dll"
-#r "FSharp.MetadataFormat.dll"
+#I "../../packages/FAKE/tools/"
+#load "../../packages/FSharp.Formatting/FSharp.Formatting.fsx"
+#r "NuGet.Core.dll"
+#r "FakeLib.dll"
 open Fake
 open System.IO
 open Fake.FileHelper
@@ -51,13 +44,21 @@ let content    = __SOURCE_DIRECTORY__ @@ "../content"
 let output     = __SOURCE_DIRECTORY__ @@ "../output"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"
 let templates  = __SOURCE_DIRECTORY__ @@ "templates"
-let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting.2.3.5-beta/"
+let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting/"
 let docTemplate = formatting @@ "templates/docpage.cshtml"
 
 // Where to look for *.csproj templates (in this order)
-let layoutRoots =
-  [ templates; formatting @@ "templates"
-    formatting @@ "templates/reference" ]
+let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
+layoutRootsAll.Add("en",[ templates; formatting @@ "templates"
+                          formatting @@ "templates/reference" ])
+subDirectories (directoryInfo templates)
+|> Seq.iter (fun d ->
+                let name = d.Name
+                if name.Length = 2 || name.Length = 3 then
+                    layoutRootsAll.Add(
+                            name, [templates @@ name
+                                   formatting @@ "templates"
+                                   formatting @@ "templates/reference" ]))
 
 // Copy static files and CSS + JS from F# Formatting
 let copyFiles () =
@@ -66,27 +67,70 @@ let copyFiles () =
   CopyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Log "Copying styles and scripts: "
 
+let references =
+  if isMono then
+    // Workaround compiler errors in Razor-ViewEngine
+    let d = RazorEngine.Compilation.ReferenceResolver.UseCurrentAssembliesReferenceResolver()
+    let loadedList = d.GetReferences () |> Seq.map (fun r -> r.GetFile()) |> Seq.cache
+    // We replace the list and add required items manually as mcs doesn't like duplicates...
+    let getItem name = loadedList |> Seq.find (fun l -> l.Contains name)
+    [ (getItem "FSharp.Core").Replace("4.3.0.0", "4.3.1.0")
+      Path.GetFullPath "./../../packages/FSharp.Compiler.Service/lib/net40/FSharp.Compiler.Service.dll"
+      Path.GetFullPath "./../../packages/FSharp.Formatting/lib/net40/System.Web.Razor.dll"
+      Path.GetFullPath "./../../packages/FSharp.Formatting/lib/net40/RazorEngine.dll"
+      Path.GetFullPath "./../../packages/FSharp.Formatting/lib/net40/FSharp.Literate.dll"
+      Path.GetFullPath "./../../packages/FSharp.Formatting/lib/net40/FSharp.CodeFormat.dll"
+      Path.GetFullPath "./../../packages/FSharp.Formatting/lib/net40/FSharp.MetadataFormat.dll" ]
+    |> Some
+  else None
+
+let binaries =
+    directoryInfo bin 
+    |> subDirectories
+    |> Array.map (fun d -> d.FullName @@ (sprintf "FSharp.Data.%s.dll" d.Name))
+    |> List.ofArray
+
+let libDirs =
+    directoryInfo bin 
+    |> subDirectories
+    |> Array.map (fun d -> d.FullName)
+    |> List.ofArray
+
 // Build API reference from XML comments
 let buildReference () =
   CleanDir (output @@ "reference")
-  for lib in referenceBinaries do
-    MetadataFormat.Generate
-      ( bin @@ lib, output @@ "reference", layoutRoots, 
-        parameters = ("root", root)::info,
-        sourceRepo = githubLink @@ "tree/master",
-        sourceFolder = __SOURCE_DIRECTORY__ @@ ".." @@ "..",
-        publicOnly = true )
+  MetadataFormat.Generate
+    ( binaries, output @@ "reference", layoutRootsAll.["en"],
+      parameters = ("root", root)::info,
+      sourceRepo = githubLink @@ "tree/master",
+      sourceFolder = __SOURCE_DIRECTORY__ @@ ".." @@ "..",
+      ?assemblyReferences = references,
+      publicOnly = true,libDirs = libDirs )
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
   let subdirs = Directory.EnumerateDirectories(content, "*", SearchOption.AllDirectories)
   for dir in Seq.append [content] subdirs do
     let sub = if dir.Length > content.Length then dir.Substring(content.Length + 1) else "."
+    let langSpecificPath(lang, path:string) =
+        path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
+        |> Array.exists(fun i -> i = lang)
+    let layoutRoots =
+        let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
+        match key with
+        | Some lang -> layoutRootsAll.[lang]
+        | None -> layoutRootsAll.["en"] // "en" is the default language
     Literate.ProcessDirectory
       ( dir, docTemplate, output @@ sub, replacements = ("root", root)::info,
-        layoutRoots = layoutRoots )
+        layoutRoots = layoutRoots,
+        ?assemblyReferences = references,
+        generateAnchors = true )
 
 // Generate
 copyFiles()
+#if HELP
 buildDocumentation()
+#endif
+#if REFERENCE
 buildReference()
+#endif

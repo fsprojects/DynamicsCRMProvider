@@ -9,20 +9,21 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DynamicsCRMProvider</RootNamespace>
     <AssemblyName>FSharp.Data.DynamicsCRMProvider</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>DynamicsCRMProvider</Name>
     <SccProjectName>SAK</SccProjectName>
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
-    <OutputPath>..\bin</OutputPath>
+    <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>
@@ -35,10 +36,10 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <Tailcalls>true</Tailcalls>
-    <OutputPath>..\bin</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>..\bin\FSharp.Data.DynamicsCRMProvider.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSharp.Data.DynamicsCRMProvider.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -51,12 +52,16 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="ProvidedTypes-head.fsi" />
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="ProvidedTypes-head.fs">
-      <Link>ProvidedTypes-head.fs</Link>
+    <Content Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fsi">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypes.fsi</Link>
+    </Content>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypes.fs</Link>
     </Compile>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="TypeProviders.Helper.fs" />
     <Compile Include="Operators.fs" />
     <Compile Include="XrmRuntime.Patterns.fs" />
@@ -64,16 +69,17 @@
     <Compile Include="XrmRuntim.QueryExpressions.fs" />
     <Compile Include="XrmRuntime.Linq.fs" />
     <Compile Include="XrmDesignTime.fs" />
+    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Crm.Services.Utility">
-      <HintPath>..\lib\Microsoft.Crm.Services.Utility.dll</HintPath>
+      <HintPath>..\..\packages\DynamicsCRMProvider\lib\net40\Microsoft.Crm.Services.Utility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk">
-      <HintPath>..\lib\microsoft.xrm.sdk.dll</HintPath>
+      <HintPath>..\..\packages\DynamicsCRMProvider\lib\net40\microsoft.xrm.sdk.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />

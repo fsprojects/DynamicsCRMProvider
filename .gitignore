@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 
+# Xamarin Studio / monodevelop user-specific
+*.userprefs
+
 # Build results
 
 [Dd]ebug/
@@ -169,8 +172,14 @@ temp/
 
 # Test results produced by build
 TestResults.xml
-release.cmd
-nuget/
 
 # Nuget outputs
 nuget/*.nupkg
+release.cmd
+release.sh
+localpackages/
+paket-files
+*.orig
+.paket/paket.exe
+docs/content/license.md
+docs/content/release-notes.md

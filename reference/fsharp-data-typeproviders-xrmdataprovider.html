@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>XrmDataProvider - DynamicsCRMProvider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Ross McKinlay; Steffen Forkmann">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="/DynamicsCRMProvider/content/style.css" />
+    <script type="text/javascript" src="/DynamicsCRMProvider/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/fsprojects/DynamicsCRMProvider">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/DynamicsCRMProvider/index.html">DynamicsCRMProvider</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>XrmDataProvider</h1>
+<div class="xmldoc">
+<p>Typed representation of a Microsoft Dynamics CRM Organization</p>
+</div>
+  <h3>Static parameters</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static parameters</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
+            OrganizationServiceUrl
+          </code>
+          <div class="tip" id="9">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The SOAP Endpoint address of the Microsoft Dynamics CRM 2011 organization service</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
+            UseNullableValues
+          </code>
+          <div class="tip" id="10">
+            <strong>Signature:</strong> bool (optional, default = false)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>If true, the provider will generate Nullable<T> for value types marked as not required in CRM. If false, value type attribtues selected that have no value will be returned as default(T).  In either case, missing strings are always represented by String.Empty, not null.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
+            RelationshipNamingType
+          </code>
+          <div class="tip" id="11">
+            <strong>Signature:</strong> RelationshipNamingType (optional, default = ParentChildPrefix)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Determines how the relationships appear on the generated types. See comments on the RelationshipNameType for details.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            DataBindingMode
+          </code>
+          <div class="tip" id="12">
+            <strong>Signature:</strong> DataBindingMode (optional, default = NormalValues)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Determines how attributes are presented when using data binding.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+            CrmOnline
+          </code>
+          <div class="tip" id="13">
+            <strong>Signature:</strong> bool (optional, default = false)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set this to true if using a CRM Online deployment. This will change the authentication to use Windows Live.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            IndividualsAmount
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> int (optional, default = 1000)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The amount of sample entities to project into the type system for each CRM entity type. Default 1000.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+            CredentialsFile
+          </code>
+          <div class="tip" id="15">
+            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Path to plain text file that includes username, password and optionally the domain. In the case of CRM Online these would be the relevant Windows Live username and password.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            Username
+          </code>
+          <div class="tip" id="16">
+            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The username for use with Windows Authentication</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
+            Password
+          </code>
+          <div class="tip" id="17">
+            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The password for use with Windows Authentication</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
+            Domain
+          </code>
+          <div class="tip" id="18">
+            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fsprojects/DynamicsCRMProvider/tree/master/docs/tools/startup#L1-1" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The domain name for use with Windows Authentication</p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">DynamicsCRMProvider</li>
+            <li><a href="/DynamicsCRMProvider/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/DynamicsCRMProvider">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/fsprojects/DynamicsCRMProvider">Source Code on GitHub</a></li>
+            <li><a href="/DynamicsCRMProvider/license.html">License</a></li>
+            <li><a href="/DynamicsCRMProvider/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Documentation</li>
+            <li><a href="/DynamicsCRMProvider/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/fsprojects/DynamicsCRMProvider"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>

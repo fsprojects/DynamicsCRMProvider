@@ -20,3 +20,9 @@ summary
     Type providers for Dynamics CRM access.
 description
     Type providers for Dynamics CRM access.
+files
+	../../bin/DynamicsCRMProvider/FSharp.Data.DynamicsCRMProvider.pdb ==> lib/net40
+	../../bin/DynamicsCRMProvider/FSharp.Data.DynamicsCRMProvider.xml ==> lib/net40
+	../../bin/DynamicsCRMProvider/Microsoft.Crm.Services.Utility.dll ==> lib/net40
+	../../bin/DynamicsCRMProvider/microsoft.xrm.sdk.xml ==> lib/net40
+	../../bin/DynamicsCRMProvider/microsoft.xrm.sdk.dll ==> lib/net40

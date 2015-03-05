@@ -76,10 +76,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Crm.Services.Utility">
-      <HintPath>..\..\lib\Microsoft.Crm.Services.Utility.dll</HintPath>
+      <HintPath>..\..\packages\DynamicsCRMProvider\lib\net40\Microsoft.Crm.Services.Utility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk">
-      <HintPath>..\..\lib\microsoft.xrm.sdk.dll</HintPath>
+      <HintPath>..\..\packages\DynamicsCRMProvider\lib\net40\microsoft.xrm.sdk.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />

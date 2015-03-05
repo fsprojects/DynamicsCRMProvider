@@ -6,7 +6,7 @@ DynamicsCRMProvider
 
 A type provider which allows to access Microsoft Dynamics CRM. [![NuGet Status](http://img.shields.io/nuget/v/DynamicsCRMProvider.svg?style=flat)](https://www.nuget.org/packages/DynamicsCRMProvider/)
 
-In order to use this type provider you will ned Microsoft Identity Model installed on the client machine.
+In order to use this type provider you will need Microsoft Identity Model installed on the client machine.
 
 This has been built against the Microsoft Dynamics CRM 2011 SDK Version 5.0.12
 

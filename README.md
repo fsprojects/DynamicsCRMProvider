@@ -15,7 +15,7 @@ This has been built against the Microsoft Dynamics CRM 2011 SDK Version 5.0.12
 ## Building
 
 * Mono: Run *build.sh*  [![Mono build status](https://travis-ci.org/fsprojects/DynamicsCRMProvider.png)](https://travis-ci.org/fsprojects/DynamicsCRMProvider)
-* Windows: Run *build.cmd* 
+* Windows: Run *build.cmd* [![Win build](https://ci.appveyor.com/api/projects/status/qmvj9x178vmwxcd9?svg=true)](https://ci.appveyor.com/project/sergey-tihon/dynamicscrmprovider)
  
 
 ## Maintainer(s)

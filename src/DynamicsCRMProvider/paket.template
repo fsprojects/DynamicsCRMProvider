@@ -23,6 +23,5 @@ description
 files
 	../../bin/DynamicsCRMProvider/FSharp.Data.DynamicsCRMProvider.pdb ==> lib/net40
 	../../bin/DynamicsCRMProvider/FSharp.Data.DynamicsCRMProvider.xml ==> lib/net40
-	../../bin/DynamicsCRMProvider/Microsoft.Crm.Services.Utility.dll ==> lib/net40
-	../../bin/DynamicsCRMProvider/microsoft.xrm.sdk.xml ==> lib/net40
-	../../bin/DynamicsCRMProvider/microsoft.xrm.sdk.dll ==> lib/net40
+	../../bin/DynamicsCRMProvider/Microsoft.Crm.Services.Utility.pdb ==> lib/net40
+	../../bin/DynamicsCRMProvider/Microsoft.Crm.Services.Utility.xml ==> lib/net40

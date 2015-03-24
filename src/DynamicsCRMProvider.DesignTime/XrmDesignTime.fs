@@ -26,6 +26,7 @@ open Microsoft.Xrm.Sdk.Client
 open Microsoft.Crm.Services.Utility
 
 open ProviderImplementation.ProvidedTypes
+open FSharp.Data.TypeProviders.XrmProvider.Internal
 
 /// Determines how relationship names appear on generated types
 type RelationshipNamingType =
@@ -56,10 +57,20 @@ type private OptionSetType =
 [<TypeProvider>]
 type XrmTypeProvider(config: TypeProviderConfig) as this =     
     inherit TypeProviderForNamespaces()
+    static do
+      // When DynamicsCRMProvider is installed via NuGet, the Microsoft.Crm.* assembly
+      // will appear typically in "../../*/lib/net40". To support this, we look at
+      // FSharp.Data.DynamicsCRMProvider.dll.config which has this pattern in custom key "ProbingLocations".
+      // Here, we resolve assemblies by looking into the specified search paths.
+      Logging.logf "Registering Assembly Resolver..."
+      AppDomain.CurrentDomain.add_AssemblyResolve(fun source args ->
+        Logging.logf "Handling assembly resolve event..."
+        FSharp.Data.TypeProviders.XrmProvider.Internal.Configuration.resolveReferencedAssembly args.Name)
+
     let xrmRuntimeInfo = XrmRuntimeInfo(config)
     let ns = "FSharp.Data.TypeProviders"     
     let asm = Assembly.GetExecutingAssembly()
-    
+
     let createOrgService uri clientCreds deviceCreds =
         let uri = Uri(uri)        
         let orgProxy = new OrganizationServiceProxy(uri, null, clientCreds, deviceCreds);
@@ -468,8 +479,4 @@ type XrmTypeProvider(config: TypeProviderConfig) as this =
 
     // add them to the namespace    
     do this.AddNamespace(ns, [paramXrmType])
-                            
-[<assembly:TypeProviderAssembly>] 
-do()
-
 

@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D383A6BC-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Crm.Services.Utility", "src\Microsoft.Crm.Services.Utility\Microsoft.Crm.Services.Utility.csproj", "{53CF97C2-34BC-4580-B62E-9F12E7626120}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DynamicsCRMProvider.Runtime", "src\DynamicsCRMProvider.Runtime\DynamicsCRMProvider.Runtime.fsproj", "{B0AFF5DE-4330-4259-A0EF-860CE0712B90}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DynamicsCRMProvider.DesignTime", "src\DynamicsCRMProvider.DesignTime\DynamicsCRMProvider.DesignTime.fsproj", "{C92A4D45-D30B-4148-93E6-E093B6BA10CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{53CF97C2-34BC-4580-B62E-9F12E7626120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53CF97C2-34BC-4580-B62E-9F12E7626120}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53CF97C2-34BC-4580-B62E-9F12E7626120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0AFF5DE-4330-4259-A0EF-860CE0712B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0AFF5DE-4330-4259-A0EF-860CE0712B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0AFF5DE-4330-4259-A0EF-860CE0712B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0AFF5DE-4330-4259-A0EF-860CE0712B90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C92A4D45-D30B-4148-93E6-E093B6BA10CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92A4D45-D30B-4148-93E6-E093B6BA10CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92A4D45-D30B-4148-93E6-E093B6BA10CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92A4D45-D30B-4148-93E6-E093B6BA10CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

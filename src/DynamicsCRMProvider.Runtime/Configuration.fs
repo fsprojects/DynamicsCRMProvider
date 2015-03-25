@@ -23,6 +23,7 @@ let rec searchDirectories patterns dirs =
       |> searchDirectories patterns
   | name::patterns ->
       dirs |> List.map (fun d -> Path.Combine(d, name))
+      |> List.filter (Directory.Exists)
       |> searchDirectories patterns
 
 /// Returns the real assembly location - when shadow copying is enabled, this

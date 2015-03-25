@@ -1,3 +1,6 @@
+#### 0.2.1 - 26.03.2015
+* Bug fix
+
 #### 0.2.0 - 26.03.2015
 * Migration to Paket
 * Update to the latest version of ProvidedTypes.fs

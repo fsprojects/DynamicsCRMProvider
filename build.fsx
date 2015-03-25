@@ -92,7 +92,7 @@ Target "AssemblyInfo" (fun _ ->
           (getAssemblyInfoAttributes projectName)
         )
         
-    CreateFSharpAssemblyInfo ("src\\Common\\AssemblyInfo.fs") 
+    CreateFSharpAssemblyInfo (("src" @@ "Common") @@ "AssemblyInfo.fs") 
         [ Attribute.Title "DynamicsCRMProvider"
           Attribute.Product project
           Attribute.Description summary

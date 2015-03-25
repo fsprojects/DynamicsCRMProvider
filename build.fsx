@@ -38,7 +38,7 @@ let summary = "A type provider for Microsoft Dynamics CRM 2011."
 let description = "A type provider for Microsoft Dynamics CRM 2011."
 
 // List of author names (for NuGet package)
-let authors = [ "Ross McKinlay; Steffen Forkmann" ]
+let authors = [ "Ross McKinlay; Steffen Forkmann; Sergey Tihon" ]
 
 // Tags for your project (for NuGet package)
 let tags = "F# fsharp typeproviders dynamics CRM"
@@ -177,16 +177,36 @@ Target "SourceLink" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
+//Target "NuGet" (fun _ ->
+//    Paket.Pack(fun p -> 
+//        { p with
+//            OutputPath = "bin"
+//            Version = release.NugetVersion
+//            ReleaseNotes = toLines release.Notes})
+//)
+
 Target "NuGet" (fun _ ->
-    Paket.Pack(fun p -> 
+    // Format the description to fit on a single line (remove \r\n and double-spaces)
+    let projectDescription = description.Replace("\r", "").Replace("\n", "").Replace("  ", " ")
+    NuGet (fun p ->
         { p with
-            OutputPath = "bin"
+            Authors = authors
+            Project = project
+            Summary = summary
+            Description = projectDescription
             Version = release.NugetVersion
-            ReleaseNotes = toLines release.Notes})
+            ReleaseNotes = String.concat " " release.Notes
+            Tags = tags
+            OutputPath = "bin"
+            WorkingDir = "bin"
+            ToolPath = @"packages\NuGet.CommandLine\tools\NuGet.exe"
+            AccessKey = getBuildParamOrDefault "nugetkey" ""
+            Publish = hasBuildParam "nugetkey" })
+        "src/DynamicsCRMProvider.nuspec"
 )
 
 Target "PublishNuget" (fun _ ->
-    Paket.Push(fun p -> 
+    Paket.Push(fun p ->
         { p with
             WorkingDir = "bin" })
 )

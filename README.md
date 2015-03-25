@@ -22,5 +22,6 @@ This has been built against the Microsoft Dynamics CRM 2011 SDK Version 5.0.12
 
 - [@forki](https://github.com/forki)
 - [@pezipink](https://github.com/pezipink)
+- [@sergey-tihon](https://github.com/sergey-tihon)
 
 The default maintainer account for projects under "fsprojects" is [@fsgit](https://github.com/fsgit) - F# Community Project Incubation Space (repo management)

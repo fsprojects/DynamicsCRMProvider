@@ -62,6 +62,9 @@
       <Link>AssemblyInfo.fs</Link>
     </Compile>
     <Compile Include="DynamicsCRMProviderAttribute.fs" />
+    <None Include="DynamicsCRMProvider.fsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>

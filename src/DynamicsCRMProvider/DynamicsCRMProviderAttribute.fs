@@ -2,5 +2,5 @@
 
 open Microsoft.FSharp.Core.CompilerServices
 
-[<TypeProviderAssembly("DynamicsCRMProvider.DesignTime")>]
+[<TypeProviderAssembly("FSharp.Data.DynamicsCRMProvider.DesignTime")>]
 do()

@@ -5,6 +5,7 @@
 
 namespace FSharp.Data.TypeProviders.XrmProvider
 
+open FSharp.Data.TypeProviders.XrmProvider
 open FSharp.Data.TypeProviders.XrmProvider.Runtime
 open FSharp.Data.TypeProviders.XrmProvider.Runtime.Common
 
@@ -28,31 +29,20 @@ open Microsoft.Crm.Services.Utility
 open ProviderImplementation.ProvidedTypes
 open FSharp.Data.TypeProviders.XrmProvider.Internal
 
-/// Determines how relationship names appear on generated types
-type RelationshipNamingType =
-    /// Relationships will be named with their schema name prefixed by 'Children of' or 'Parent of' and suffixed with the returned entity type name.
-    | ParentChildPrefix = 0
-    /// Relationships will be named with their schema name prefixed by 1:N, N:1 or N:N.
-    | CrmStylePrefix = 1
-    /// Relationships will be named only with their schema name.  You will need to examine the intelliense comments to determine which direction the relationships point.                         
-    | SchemaNameOnly = 2
-
-type OptionSetEnum  =
-    | Unused = 2147483647
-
 type internal XrmRuntimeInfo (config : TypeProviderConfig) =
-    let runtimeAssembly = Assembly.LoadFrom(config.RuntimeAssembly)    
-    member this.RuntimeAssembly = runtimeAssembly   
+    let runtimeAssembly = Assembly.LoadFrom(config.RuntimeAssembly)
+    member this.RuntimeAssembly = runtimeAssembly
 
 type private RelationshipType =
     | OneToMany
     | ManyToOne
     | ManyToMany
-    
+
 type private OptionSetType =
     | Picklist of PicklistAttributeMetadata
-    | State of StateAttributeMetadata   
-    | Status of StatusAttributeMetadata 
+    | State of StateAttributeMetadata
+    | Status of StatusAttributeMetadata
+
 
 [<TypeProvider>]
 type XrmTypeProvider(config: TypeProviderConfig) as this =     

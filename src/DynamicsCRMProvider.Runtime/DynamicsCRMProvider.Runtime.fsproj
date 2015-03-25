@@ -79,6 +79,7 @@
     <Compile Include="XrmRuntime.Common.fs" />
     <Compile Include="XrmRuntim.QueryExpressions.fs" />
     <Compile Include="XrmRuntime.Linq.fs" />
+    <Compile Include="XrmDesignTime.fs" />
     <None Include="paket.references" />
     <Content Include="App.config" />
   </ItemGroup>

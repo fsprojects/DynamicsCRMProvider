@@ -72,15 +72,11 @@
 <span class="l">15: </span>
 <span class="l">16: </span>
 <span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
 </pre>
 </td>
 <td class="snippet"><pre class="fssnip">
-<span class="c">// reference the type provider dll</span>
-<span class="prep">#r</span> <span class="s">&quot;System.Runtime.Serialization&quot;</span>   
-<span class="prep">#r</span> <span class="s">&quot;FSharp.Data.DynamicsCRMProvider.dll&quot;</span>
-<span class="prep">#r</span> <span class="s">@&quot;..\lib\Microsoft.Xrm.Sdk.dll&quot;</span>   
+<span class="c">// load the type provider dependencies</span>
+<span class="prep">#load</span> <span class="s">@&quot;..\packages\DynamicsCRMProvider\DynamicsCRMProvider.fsx&quot;</span>
 
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">Linq</span>

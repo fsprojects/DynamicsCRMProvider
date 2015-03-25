@@ -1,7 +1,6 @@
 NUGET
   remote: https://nuget.org/api/v2
   specs:
-    DynamicsCRMProvider (0.1.0)
     FAKE (3.18.0)
     FSharp.Compiler.Service (0.0.85)
     FSharp.Formatting (2.7.4)
@@ -12,9 +11,13 @@ NUGET
     Microsoft.Bcl (1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Bcl.Build (1.0.21)
+    Microsoft.CrmSdk.CoreAssemblies (5.0.18)
+      Microsoft.IdentityModel (>= 6.1.7600.16394) - framework: >= net40
+    Microsoft.IdentityModel (6.1.7600.16394) - framework: >= net40
     Microsoft.Net.Http (2.2.29)
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
+    NuGet.CommandLine (2.8.3)
     NUnit (2.6.4)
     NUnit.Runners (2.6.4)
     Octokit (0.7.2)
@@ -23,9 +26,9 @@ NUGET
 GITHUB
   remote: fsharp/FAKE
   specs:
-    modules/Octokit/Octokit.fsx (9c61ff79fce68a16fc4b027c8a931d89d7fb7c6d)
+    modules/Octokit/Octokit.fsx (12b839de599dd8ed448416a963025bb26b978a8d)
       Octokit
   remote: fsprojects/FSharp.TypeProviders.StarterPack
   specs:
-    src/ProvidedTypes.fs (04181b5a84801be79de4fd7dae3e9bf8d621d9e9)
-    src/ProvidedTypes.fsi (04181b5a84801be79de4fd7dae3e9bf8d621d9e9)
+    src/ProvidedTypes.fs (cf96cf990590da7082197452b1b544e26ebed472)
+    src/ProvidedTypes.fsi (cf96cf990590da7082197452b1b544e26ebed472)

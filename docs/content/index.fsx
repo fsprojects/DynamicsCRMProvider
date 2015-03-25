@@ -26,10 +26,8 @@ Example
 This example demonstrates the use of the type provider from a F# script file:
 
 *)
-// reference the type provider dll
-#r "System.Runtime.Serialization"   
-#r "FSharp.Data.DynamicsCRMProvider.dll"
-#r @"..\lib\Microsoft.Xrm.Sdk.dll"   
+// load the type provider dependencies
+#load @"..\packages\DynamicsCRMProvider\DynamicsCRMProvider.fsx"
 
 open System
 open System.Linq

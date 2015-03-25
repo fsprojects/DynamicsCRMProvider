@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>@project@</id>
+    <version>@build.number@</version>
+    <authors>@authors@</authors>
+    <owners>@authors@</owners>
+    <projectUrl>http://fsprojects.github.io/DynamicsCRMProvider/</projectUrl>
+    <licenseUrl>http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/fsprojects/DynamicsCRMProvider/master/docs/files/img/logo.png</iconUrl>
+    <summary>@summary@</summary>
+    <description>@description@</description>
+    <releaseNotes>@releaseNotes@</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>@tags@</tags>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="[5.0.18]" />
+    </dependencies>
+    <references>
+      <reference file="Microsoft.Crm.Services.Utility.dll" />
+      <reference file="FSharp.Data.DynamicsCRMProvider.Runtime.dll" />
+      <reference file="FSharp.Data.DynamicsCRMProvider.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.dll" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.pdb" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.Runtime.dll" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.Runtime.pdb" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.Runtime.dll.config" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.DesignTime.dll" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\FSharp.Data.DynamicsCRMProvider.DesignTime.pdb" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\Microsoft.Crm.Services.Utility.dll" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\Microsoft.Crm.Services.Utility.pdb" target="lib\net40" />
+    <file src="..\bin\DynamicsCRMProvider\DynamicsCRMProvider.fsx" target="." />
+  </files>
+</package>

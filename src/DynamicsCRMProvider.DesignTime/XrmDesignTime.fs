@@ -5,6 +5,7 @@
 
 namespace FSharp.Data.TypeProviders.XrmProvider
 
+open FSharp.Data.TypeProviders.XrmProvider
 open FSharp.Data.TypeProviders.XrmProvider.Runtime
 open FSharp.Data.TypeProviders.XrmProvider.Runtime.Common
 
@@ -26,40 +27,40 @@ open Microsoft.Xrm.Sdk.Client
 open Microsoft.Crm.Services.Utility
 
 open ProviderImplementation.ProvidedTypes
-
-/// Determines how relationship names appear on generated types
-type RelationshipNamingType =
-    /// Relationships will be named with their schema name prefixed by 'Children of' or 'Parent of' and suffixed with the returned entity type name.
-    | ParentChildPrefix = 0
-    /// Relationships will be named with their schema name prefixed by 1:N, N:1 or N:N.
-    | CrmStylePrefix = 1
-    /// Relationships will be named only with their schema name.  You will need to examine the intelliense comments to determine which direction the relationships point.                         
-    | SchemaNameOnly = 2
-
-type OptionSetEnum  =
-    | Unused = 2147483647
+open FSharp.Data.TypeProviders.XrmProvider.Internal
 
 type internal XrmRuntimeInfo (config : TypeProviderConfig) =
-    let runtimeAssembly = Assembly.LoadFrom(config.RuntimeAssembly)    
-    member this.RuntimeAssembly = runtimeAssembly   
+    let runtimeAssembly = Assembly.LoadFrom(config.RuntimeAssembly)
+    member this.RuntimeAssembly = runtimeAssembly
 
 type private RelationshipType =
     | OneToMany
     | ManyToOne
     | ManyToMany
-    
+
 type private OptionSetType =
     | Picklist of PicklistAttributeMetadata
-    | State of StateAttributeMetadata   
-    | Status of StatusAttributeMetadata 
+    | State of StateAttributeMetadata
+    | Status of StatusAttributeMetadata
+
 
 [<TypeProvider>]
 type XrmTypeProvider(config: TypeProviderConfig) as this =     
     inherit TypeProviderForNamespaces()
+    static do
+      // When DynamicsCRMProvider is installed via NuGet, the Microsoft.Crm.* assembly
+      // will appear typically in "../../*/lib/net40". To support this, we look at
+      // FSharp.Data.DynamicsCRMProvider.dll.config which has this pattern in custom key "ProbingLocations".
+      // Here, we resolve assemblies by looking into the specified search paths.
+      Logging.logf "Registering Assembly Resolver..."
+      AppDomain.CurrentDomain.add_AssemblyResolve(fun source args ->
+        Logging.logf "Handling assembly resolve event..."
+        FSharp.Data.TypeProviders.XrmProvider.Internal.Configuration.resolveReferencedAssembly args.Name)
+
     let xrmRuntimeInfo = XrmRuntimeInfo(config)
     let ns = "FSharp.Data.TypeProviders"     
     let asm = Assembly.GetExecutingAssembly()
-    
+
     let createOrgService uri clientCreds deviceCreds =
         let uri = Uri(uri)        
         let orgProxy = new OrganizationServiceProxy(uri, null, clientCreds, deviceCreds);
@@ -468,8 +469,4 @@ type XrmTypeProvider(config: TypeProviderConfig) as this =
 
     // add them to the namespace    
     do this.AddNamespace(ns, [paramXrmType])
-                            
-[<assembly:TypeProviderAssembly>] 
-do()
-
 

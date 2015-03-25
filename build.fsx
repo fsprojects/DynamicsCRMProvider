@@ -91,8 +91,15 @@ Target "AssemblyInfo" (fun _ ->
           System.IO.Path.GetDirectoryName(projectPath),
           (getAssemblyInfoAttributes projectName)
         )
+        
+    CreateFSharpAssemblyInfo ("src\\Common\\AssemblyInfo.fs") 
+        [ Attribute.Title "DynamicsCRMProvider"
+          Attribute.Product project
+          Attribute.Description summary
+          Attribute.Version release.AssemblyVersion
+          Attribute.FileVersion release.AssemblyVersion ]
 
-    !! "src/**/*.??proj"
+    !! "src/**/*.csproj"
     |> Seq.map getProjectDetails
     |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
         match projFileName with

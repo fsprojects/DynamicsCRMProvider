@@ -192,26 +192,6 @@ Target "NuGet" (fun _ ->
             ReleaseNotes = toLines release.Notes})
 )
 
-//Target "NuGet" (fun _ ->
-//    // Format the description to fit on a single line (remove \r\n and double-spaces)
-//    let projectDescription = description.Replace("\r", "").Replace("\n", "").Replace("  ", " ")
-//    NuGet (fun p ->
-//        { p with
-//            Authors = authors
-//            Project = project
-//            Summary = summary
-//            Description = projectDescription
-//            Version = release.NugetVersion
-//            ReleaseNotes = String.concat " " release.Notes
-//            Tags = tags
-//            OutputPath = "bin"
-//            WorkingDir = "bin"
-//            ToolPath = @"packages\NuGet.CommandLine\tools\NuGet.exe"
-//            AccessKey = getBuildParamOrDefault "nugetkey" ""
-//            Publish = hasBuildParam "nugetkey" })
-//        "src/DynamicsCRMProvider.nuspec"
-//)
-
 Target "PublishNuget" (fun _ ->
     Paket.Push(fun p ->
         { p with

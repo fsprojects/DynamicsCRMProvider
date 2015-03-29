@@ -1,9 +1,9 @@
 type file
 id DynamicsCRMProvider
 owners
-    Ross McKinlay, Steffen Forkmann
+    Ross McKinlay, Steffen Forkmann, Sergey Tihon
 authors 
-    Ross McKinlay, Steffen Forkmann
+    Ross McKinlay, Steffen Forkmann, Sergey Tihon
 projectUrl
     http://github.com/fsprojects/DynamicsCRMProvider
 iconUrl
@@ -21,7 +21,12 @@ summary
 description
     Type providers for Dynamics CRM access.
 dependencies
-    Microsoft.CrmSdk.CoreAssemblies >= 5.0.18 < 6.0
+    Microsoft.CrmSdk.CoreAssemblies = 5.0.18
 files
 	../../bin/DynamicsCRMProvider/FSharp.Data.DynamicsCRMProvider*.* ==> lib/net40
 	../../bin/DynamicsCRMProvider/Microsoft.Crm.Services.Utility.* ==> lib/net40
+	../../bin/DynamicsCRMProvider/DynamicsCRMProvider.fsx ==> .
+references
+	Microsoft.Crm.Services.Utility.dll
+    FSharp.Data.DynamicsCRMProvider.Runtime.dll
+    FSharp.Data.DynamicsCRMProvider.dll

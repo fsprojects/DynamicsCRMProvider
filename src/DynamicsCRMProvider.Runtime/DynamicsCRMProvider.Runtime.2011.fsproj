@@ -5,13 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>c92a4d45-d30b-4148-93e6-e093b6ba10cd</ProjectGuid>
+    <ProjectGuid>b0aff5de-4330-4259-a0ef-860ce0712b90</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DynamicsCRMProvider.DesignTime</RootNamespace>
-    <AssemblyName>FSharp.Data.DynamicsCRMProvider.DesignTime</AssemblyName>
+    <RootNamespace>DynamicsCRMProvider.Runtime</RootNamespace>
+    <AssemblyName>FSharp.Data.DynamicsCRMProvider.Runtime</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
-    <Name>DynamicsCRMProvider.DesignTime</Name>
+    <Name>DynamicsCRMProvider.Runtime.2011</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\FSharp.Data.DynamicsCRMProvider.DesignTime.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\FSharp.Data.DynamicsCRMProvider.Runtime.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\FSharp.Data.DynamicsCRMProvider.DesignTime.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSharp.Data.DynamicsCRMProvider.Runtime.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -56,14 +57,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fsi">
-      <Paket>True</Paket>
-      <Link>paket-files/ProvidedTypes.fsi</Link>
-    </Content>
-    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fs">
-      <Paket>True</Paket>
-      <Link>paket-files/ProvidedTypes.fs</Link>
-    </Compile>
     <Content Include="bin\tools\CrmSvcUtil.exe">
       <Paket>True</Paket>
     </Content>
@@ -79,26 +72,45 @@
     <Compile Include="..\Common\AssemblyInfo.fs">
       <Link>AssemblyInfo.fs</Link>
     </Compile>
-    <Compile Include="TypeProviders.Helper.fs" />
-    <Compile Include="XrmDesignTime.fs" />
     <None Include="paket.references" />
+    <Content Include="App.config" />
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\Configuration.fs">
+      <Link>Configuration.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\Logging.fs">
+      <Link>Logging.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\Operators.fs">
+      <Link>Operators.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\XrmDesignTime.fs">
+      <Link>XrmDesignTime.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\XrmRuntim.QueryExpressions.fs">
+      <Link>XrmRuntim.QueryExpressions.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\XrmRuntime.Common.fs">
+      <Link>XrmRuntime.Common.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\XrmRuntime.Linq.fs">
+      <Link>XrmRuntime.Linq.fs</Link>
+    </Compile>
+    <Compile Include="..\DynamicsCRMProvider.Runtime.Shared\XrmRuntime.Patterns.fs">
+      <Link>XrmRuntime.Patterns.fs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Crm.Services.Utility\Microsoft.Crm.Services.Utility.csproj">
-      <Name>Microsoft.Crm.Services.Utility</Name>
-      <Project>{53cf97c2-34bc-4580-b62e-9f12e7626120}</Project>
-      <Private>True</Private>
-    </ProjectReference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <ProjectReference Include="..\DynamicsCRMProvider.Runtime\DynamicsCRMProvider.Runtime.fsproj">
-      <Name>DynamicsCRMProvider.Runtime</Name>
-      <Project>{b0aff5de-4330-4259-a0ef-860ce0712b90}</Project>
+    <ProjectReference Include="..\Microsoft.Crm.Services.Utility\Microsoft.Crm.Services.Utility.csproj">
+      <Name>Microsoft.Crm.Services.Utility</Name>
+      <Project>{53cf97c2-34bc-4580-b62e-9f12e7626120}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

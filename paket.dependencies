@@ -5,7 +5,7 @@ nuget NUnit
 nuget NUnit.Runners
 nuget FAKE
 nuget SourceLink.Fake
-nuget Microsoft.CrmSdk.CoreAssemblies < 6.0.0
+nuget Microsoft.CrmSdk.CoreAssemblies 9.0.0.5
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx
 github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fsi

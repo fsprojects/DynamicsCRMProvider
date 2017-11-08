@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>@project@</id>
+    <id>DynamicsCRMProvider365</id>
     <version>@build.number@</version>
     <authors>@authors@</authors>
     <owners>@authors@</owners>
-    <licenseUrl>http://github.com/fsprojects/DynamicsCRMProvider/blob/master/LICENSE.md</licenseUrl>
+    <licenseUrl>http://github.com/Mouaijin/DynamicsCRMProvider/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>http://fsprojects.github.com/DynamicsCRMProvider</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>@summary@</summary>

@@ -2,12 +2,16 @@
 using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Microsoft.Crm.Services.Utility")]
-[assembly: AssemblyProductAttribute("DynamicsCRMProvider")]
-[assembly: AssemblyDescriptionAttribute("A type provider for Microsoft Dynamics CRM 2011.")]
-[assembly: AssemblyVersionAttribute("0.2.1")]
-[assembly: AssemblyFileVersionAttribute("0.2.1")]
+[assembly: AssemblyProductAttribute("DynamicsCRMProvider365")]
+[assembly: AssemblyDescriptionAttribute("A type provider for Microsoft Dynamics CRM 365.")]
+[assembly: AssemblyVersionAttribute("0.3.0")]
+[assembly: AssemblyFileVersionAttribute("0.3.0")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.2.1";
+        internal const System.String AssemblyTitle = "Microsoft.Crm.Services.Utility";
+        internal const System.String AssemblyProduct = "DynamicsCRMProvider365";
+        internal const System.String AssemblyDescription = "A type provider for Microsoft Dynamics CRM 365.";
+        internal const System.String AssemblyVersion = "0.3.0";
+        internal const System.String AssemblyFileVersion = "0.3.0";
     }
 }

@@ -1,0 +1,4 @@
+build.fsx(175,9): warning FS0044: This construct is deprecated. use SourceLink.Index
+build.fsx(175,9): warning FS0044: This construct is deprecated. use SourceLink.Index
+build.fsx(176,9): warning FS0044: This construct is deprecated. use SourceLink.Index
+build.fsx(176,9): warning FS0044: This construct is deprecated. use SourceLink.Index

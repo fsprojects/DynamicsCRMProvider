@@ -27,21 +27,21 @@ open SourceLink
 
 // The name of the project
 // (used by attributes in AssemblyInfo, name of a NuGet package and directory in 'src')
-let project = "DynamicsCRMProvider"
+let project = "DynamicsCRMProvider365"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "A type provider for Microsoft Dynamics CRM 2011."
+let summary = "A type provider for Microsoft Dynamics CRM 365."
 
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = "A type provider for Microsoft Dynamics CRM 2011."
+let description = "A type provider for Microsoft Dynamics CRM 365."
 
 // List of author names (for NuGet package)
 let authors = [ "Ross McKinlay; Steffen Forkmann; Sergey Tihon" ]
 
 // Tags for your project (for NuGet package)
-let tags = "F# fsharp typeproviders dynamics CRM"
+let tags = "F# fsharp typeproviders dynamics CRM 365"
 
 // File system information 
 let solutionFile  = "DynamicsCRMProvider.sln"
@@ -51,14 +51,14 @@ let testAssemblies = "tests/**/bin/Release/*Tests*.dll"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
-let gitOwner = "fsprojects" 
+let gitOwner = "Mouaijin" 
 let gitHome = "https://github.com/" + gitOwner
 
 // The name of the project on GitHub
 let gitName = "DynamicsCRMProvider"
 
 // The url for the raw files hosted
-let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/fsprojects"
+let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/Mouaijin"
 
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
@@ -174,7 +174,7 @@ Target "SourceLink" (fun _ ->
         let files = proj.Compiles -- assemblyInfo
         repo.VerifyChecksums files
         proj.VerifyPdbChecksums files
-        proj.CreateSrcSrv baseUrl repo.Revision (repo.Paths files)
+        proj.CreateSrcSrv baseUrl repo.Commit (repo.Paths files)
         Pdbstr.exec proj.OutputFilePdb proj.OutputFilePdbSrcSrv
     )
 )

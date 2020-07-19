@@ -8,6 +8,10 @@ using System.Reflection;
 [assembly: AssemblyFileVersionAttribute("0.2.1")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.2.1";
+        internal const System.String AssemblyTitle = "Microsoft.Crm.Services.Utility";
+        internal const System.String AssemblyProduct = "DynamicsCRMProvider";
+        internal const System.String AssemblyDescription = "A type provider for Microsoft Dynamics CRM 2011.";
+        internal const System.String AssemblyVersion = "0.2.1";
+        internal const System.String AssemblyFileVersion = "0.2.1";
     }
 }
